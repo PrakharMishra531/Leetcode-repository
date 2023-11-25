@@ -1,14 +1,18 @@
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-        auto lb = lower_bound(nums.begin(),nums.end(),target);
-        
-        if(nums[nums.size()-1]<target){
-            return nums.size();
+        int low = 0,ans=nums.size();
+        int high = nums.size()-1;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(nums[mid]>=target){
+                ans=mid;
+                high = mid-1;
+            }
+            else{
+                low=mid+1;
+            }
         }
-        else{
-            return lb-nums.begin();
-        }
-
+        return ans;
     }
 };
