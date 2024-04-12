@@ -9,18 +9,14 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        ListNode* temp = head;
-        vector<ListNode*>arr;
-        if(head!=NULL){
-        while(temp->next!=NULL){
-            arr.push_back(temp);
-            temp=temp->next;
-            auto it = find(arr.begin(),arr.end(),temp);
-            if(it!=arr.end()){
-                return true;
-            }
-        }
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast!=NULL&&fast->next!=NULL){
+            slow=slow->next;
+            fast = fast->next->next;
+            if(slow == fast) return true;
         }
         return false;
+
     }
 };
